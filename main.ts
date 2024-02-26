@@ -1,74 +1,114 @@
+namespace SpriteKind {
+    export const invinisble = SpriteKind.create()
+}
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    console.log("up")
+    if (!(menu)) {
+        mySprite.setVelocity(0, -100)
+    }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     console.log("B pressed")
+    mySprite.setVelocity(0, 0)
 })
 controller.anyButton.onEvent(ControllerButtonEvent.Pressed, function () {
     button += 1
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     console.log("A pressed")
-    if (moving_left) {
-        sprites.destroy(mySprite3)
-        sprites.destroy(mySprite4)
-        mySprite4 = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
-            . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
-            5 5 5 5 5 5 5 5 5 5 5 5 5 5 . . 
-            . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
-            . . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.Projectile)
-        mySprite4.setPosition(mySprite.x, mySprite.y)
-        mySprite4.setVelocity(-250, 0)
-    } else {
-        sprites.destroy(mySprite4)
-        sprites.destroy(mySprite3)
-        mySprite3 = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            5 5 5 5 5 5 5 5 5 5 5 5 5 5 . . 
-            . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
-            . . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
-            . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
-            5 5 5 5 5 5 5 5 5 5 5 5 5 5 . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.Projectile)
-        mySprite3.setPosition(mySprite.x, mySprite.y)
-        mySprite3.setVelocity(250, 0)
+    if (!(menu)) {
+        if (moving_left) {
+            sprites.destroy(mySprite3)
+            sprites.destroy(mySprite4)
+            mySprite4 = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+                . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
+                5 5 5 5 5 5 5 5 5 5 5 5 5 5 . . 
+                . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
+                . . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, SpriteKind.Projectile)
+            mySprite4.setPosition(mySprite.x, mySprite.y)
+            mySprite4.setVelocity(-250, 0)
+        } else {
+            sprites.destroy(mySprite4)
+            sprites.destroy(mySprite3)
+            mySprite3 = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                5 5 5 5 5 5 5 5 5 5 5 5 5 5 . . 
+                . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
+                . . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+                . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
+                5 5 5 5 5 5 5 5 5 5 5 5 5 5 . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, SpriteKind.Projectile)
+            mySprite3.setPosition(mySprite.x, mySprite.y)
+            mySprite3.setVelocity(250, 0)
+        }
     }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.setVelocity(-100, 0)
-    console.log("left")
-    moving_left = true
+    if (!(menu)) {
+        mySprite.setVelocity(-100, 0)
+        console.log("left")
+        moving_left = true
+    }
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.setVelocity(100, 0)
-    moving_left = false
-    console.log("right")
+    if (!(menu)) {
+        mySprite.setVelocity(100, 0)
+        moving_left = false
+        console.log("right")
+    }
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    console.log("down")
+    if (!(menu)) {
+        mySprite.setVelocity(0, 100)
+    }
+})
+controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
+    commands = game.askForString("enter commands")
+    if (commands == "pause") {
+        if (menu) {
+            menu = false
+        } else {
+            menu = true
+        }
+    } else {
+        if (commands == "time") {
+            info.startCountdown(60)
+        } else {
+            if (commands == "time more") {
+                info.startCountdown(120)
+            } else if (commands == "harder") {
+                hardness = 2000
+            } else if (commands == "hardest") {
+                hardness = 1000
+            } else if (commands == "easter") {
+                mySprite.sayText("how" + " did  " + " you" + " find" + "this" + text_list._pickRandom(), 2000, true)
+            } else {
+                mySprite.sayText("invalid command", 2000, true)
+            }
+        }
+    }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(mySprite2)
@@ -82,10 +122,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     console.log("game over")
 })
 let mySprite2: Sprite = null
+let commands = ""
 let mySprite4: Sprite = null
 let mySprite3: Sprite = null
 let moving_left = false
+let menu = false
+let hardness = 0
+let text_list: string[] = []
 let mySprite: Sprite = null
+game.showLongText("how to play < > to and ^ down arrow or wasd. objective destroy astroids. to summon a laser press A or space. to pause the game press munu and enter pause to toggle. note game will not actuly pause it will just make you not take damage. and not be able to move. ", DialogLayout.Full)
+game.showLongText("the game will last forever. intil you press menu and enter time. if you want more time than 60 seconds enter time more. for twice as much time. if the game is to easy press menu and enter harder. if thats still not hard. enter harest. ", DialogLayout.Full)
 let button = 0
 console.logValue("input", 0)
 mySprite = sprites.create(img`
@@ -107,7 +153,6 @@ mySprite = sprites.create(img`
     ....................................
     `, SpriteKind.Player)
 scene.cameraFollowSprite(mySprite)
-controller.moveSprite(mySprite, 0, 100)
 mySprite.setStayInScreen(true)
 mySprite.startEffect(effects.fire)
 scene.setBackgroundImage(img`
@@ -233,6 +278,7 @@ scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     `)
 scroller.scrollBackgroundWithCamera(scroller.CameraScrollMode.BothDirections)
+text_list = [" out!", " out?", " out."]
 let list = [
 img`
     . . . . . . . . . . . . . . . . 
@@ -326,10 +372,20 @@ img`
     `
 ]
 info.setScore(0)
+hardness = 5000
+game.onUpdate(function () {
+    if (menu) {
+        mySprite.setVelocity(0, 0)
+        mySprite.setKind(SpriteKind.invinisble)
+        mySprite.sayText("game_paused", 100, false)
+    } else {
+        mySprite.setKind(SpriteKind.Player)
+    }
+})
 game.onUpdateInterval(5000, function () {
     console.logValue("input", button)
 })
-game.onUpdateInterval(5000, function () {
+game.onUpdateInterval(hardness, function () {
     sprites.destroy(mySprite2)
     if (Math.percentChance(50)) {
         mySprite2 = sprites.create(list._pickRandom(), SpriteKind.Enemy)
@@ -376,5 +432,12 @@ game.onUpdateInterval(5000, function () {
                 }
             }
         }
+    }
+})
+game.onUpdateInterval(100, function () {
+    if (characterAnimations.matchesRule(mySprite, characterAnimations.rule(Predicate.NotMoving))) {
+        effects.clearParticles(mySprite)
+    } else {
+        mySprite.startEffect(effects.fire)
     }
 })
