@@ -66,6 +66,11 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
         moving_left = true
     }
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite, otherSprite) {
+    mySprite2.startEffect(effects.fire)
+    mySprite2.startEffect(effects.fire)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Projectile)
+})
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(menu)) {
         mySprite.setVelocity(100, mySprite.vy)
@@ -78,7 +83,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
-    commands = game.askForString("enter commands")
+    commands = game.askForString("enter commands", 24)
     if (commands == "pause") {
         if (menu) {
             menu = false
@@ -112,8 +117,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     game.setGameOverScoringType(game.ScoringType.HighScore)
     game.gameOver(false)
 })
-let mySprite2: Sprite = null
 let commands = ""
+let mySprite2: Sprite = null
 let mySprite3: Sprite = null
 let mySprite4: Sprite = null
 let moving_left = false
@@ -268,7 +273,13 @@ scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     `)
 scroller.scrollBackgroundWithCamera(scroller.CameraScrollMode.BothDirections)
-text_list = [" out!", " out?", " out."]
+text_list = [
+" out!",
+" out?",
+" out.",
+"out??",
+"out!!"
+]
 let list = [
 img`
     . . . . . . . . . . . . . . . . 
@@ -429,48 +440,48 @@ game.onUpdate(function () {
 game.onUpdateInterval(hardness, function () {
     if (Math.percentChance(50)) {
         mySprite2 = sprites.create(list._pickRandom(), SpriteKind.Enemy)
-        mySprite2.setVelocity(-5, 0)
-        mySprite2.setPosition(mySprite.x + 100, mySprite.y + randint(10, 60))
-        mySprite2.lifespan = 5000
+        mySprite2.setVelocity(-5, randint(-5, 5))
+        mySprite2.setPosition(mySprite.x + randint(-100, 100), mySprite.y + randint(-60, 60))
+        mySprite2.lifespan = 10000
     } else {
         if (Math.percentChance(50)) {
             mySprite2 = sprites.create(list._pickRandom(), SpriteKind.Enemy)
-            mySprite2.lifespan = 5000
+            mySprite2.lifespan = 10000
             if (Math.percentChance(50)) {
-                mySprite2.setVelocity(-15, 0)
+                mySprite2.setVelocity(-15, randint(-5, 5))
             } else {
-                mySprite2.setVelocity(15, 0)
+                mySprite2.setVelocity(15, randint(-5, 5))
             }
             mySprite2.setPosition(mySprite.x + 100, mySprite.y + randint(10, 60))
         } else {
             if (Math.percentChance(50)) {
                 mySprite2 = sprites.create(list._pickRandom(), SpriteKind.Enemy)
-                mySprite2.lifespan = 5000
-                mySprite2.setVelocity(-35, 0)
+                mySprite2.lifespan = 10000
+                mySprite2.setVelocity(-35, randint(-5, 5))
                 mySprite2.setPosition(mySprite.x + 100, mySprite.y + randint(10, 60))
                 if (Math.percentChance(50)) {
-                    mySprite2.setVelocity(-15, 0)
+                    mySprite2.setVelocity(-15, randint(-5, 5))
                 } else {
-                    mySprite2.setVelocity(15, 0)
+                    mySprite2.setVelocity(15, randint(-5, 5))
                 }
             } else {
                 if (Math.percentChance(50)) {
                     mySprite2 = sprites.create(list._pickRandom(), SpriteKind.Enemy)
-                    mySprite2.lifespan = 5000
+                    mySprite2.lifespan = 10000
                     mySprite2.setVelocity(-65, 0)
                     mySprite2.setPosition(mySprite.x + 100, mySprite.y + randint(10, 60))
                     if (Math.percentChance(50)) {
-                        mySprite2.setVelocity(-15, 0)
+                        mySprite2.setVelocity(-15, randint(-5, 5))
                     } else {
-                        mySprite2.setVelocity(15, 0)
+                        mySprite2.setVelocity(15, randint(-5, 5))
                     }
                 } else {
                     mySprite2 = sprites.create(list._pickRandom(), SpriteKind.Enemy)
-                    mySprite2.lifespan = 5000
+                    mySprite2.lifespan = 10000
                     mySprite2.setVelocity(-125, 0)
                     mySprite2.setPosition(mySprite.x + 100, mySprite.y + randint(10, 60))
                     if (Math.percentChance(50)) {
-                        mySprite2.setVelocity(-15, 0)
+                        mySprite2.setVelocity(-15, randint(-5, 5))
                     } else {
                         mySprite2.setVelocity(15, 0)
                     }
