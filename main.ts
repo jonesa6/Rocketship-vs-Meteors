@@ -3,22 +3,15 @@ namespace SpriteKind {
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(menu)) {
-        mySprite.setVelocity(0, -100)
+        mySprite.setVelocity(mySprite.vx, -100)
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    console.log("B pressed")
     mySprite.setVelocity(0, 0)
 })
-controller.anyButton.onEvent(ControllerButtonEvent.Pressed, function () {
-    button += 1
-})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    console.log("A pressed")
     if (!(menu)) {
         if (moving_left) {
-            sprites.destroy(mySprite3)
-            sprites.destroy(mySprite4)
             mySprite4 = sprites.create(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
@@ -39,9 +32,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                 `, SpriteKind.Projectile)
             mySprite4.setPosition(mySprite.x, mySprite.y)
             mySprite4.setVelocity(-250, 0)
+            mySprite4.lifespan = 5000
         } else {
-            sprites.destroy(mySprite4)
-            sprites.destroy(mySprite3)
             mySprite3 = sprites.create(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
@@ -62,26 +54,27 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                 `, SpriteKind.Projectile)
             mySprite3.setPosition(mySprite.x, mySprite.y)
             mySprite3.setVelocity(250, 0)
+            mySprite3.lifespan = 5000
         }
     }
 })
+/**
+ */
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(menu)) {
-        mySprite.setVelocity(-100, 0)
-        console.log("left")
+        mySprite.setVelocity(-100, mySprite.vy)
         moving_left = true
     }
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(menu)) {
-        mySprite.setVelocity(100, 0)
+        mySprite.setVelocity(100, mySprite.vy)
         moving_left = false
-        console.log("right")
     }
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(menu)) {
-        mySprite.setVelocity(0, 100)
+        mySprite.setVelocity(mySprite.vx, 100)
     }
 })
 controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -114,17 +107,15 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
     sprites.destroy(mySprite2)
     music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
     info.changeScoreBy(1)
-    console.log("destroyed enmey sprite")
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     game.setGameOverScoringType(game.ScoringType.HighScore)
     game.gameOver(false)
-    console.log("game over")
 })
 let mySprite2: Sprite = null
 let commands = ""
-let mySprite4: Sprite = null
 let mySprite3: Sprite = null
+let mySprite4: Sprite = null
 let moving_left = false
 let menu = false
 let hardness = 0
@@ -132,7 +123,6 @@ let text_list: string[] = []
 let mySprite: Sprite = null
 game.showLongText("how to play < > to and ^ down arrow or wasd. objective destroy astroids. to summon a laser press A or space. to pause the game press munu and enter pause to toggle. note game will not actuly pause it will just make you not take damage. and not be able to move. ", DialogLayout.Full)
 game.showLongText("the game will last forever. intil you press menu and enter time. if you want more time than 60 seconds enter time more. for twice as much time. if the game is to easy press menu and enter harder. if thats still not hard. enter harest. ", DialogLayout.Full)
-let button = 0
 console.logValue("input", 0)
 mySprite = sprites.create(img`
     ....................f...............
@@ -369,6 +359,60 @@ img`
     b b a c a b a a . . . . . . . . 
     a b 6 b b a c . . . . . . . . . 
     . a a b c . . . . . . . . . . . 
+    `,
+img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . c b a c . . . . . . 
+    . . . . c c b c f a c . . . . . 
+    . . . . a f b b b a c . . . . . 
+    . . . . a f f b a f c c . . . . 
+    . . . . c b b a f f c . . . . . 
+    . . . . . b b a f a . . . . . . 
+    . . . . . . c b b . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `,
+img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . c c . . . . . . . . 
+    . . . . c a f b c . . . . . . . 
+    . . . . b f f b c c . . . . . . 
+    . . . a a f b a b a c . . . . . 
+    . . . c a c b b f f b . . . . . 
+    . . . . b f f b f a b . . . . . 
+    . . . . a f f b b b a . . . . . 
+    . . . . . a b b c c . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `,
+img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . c c c . . . . . . 
+    . . . . . . a b a a . . . . . . 
+    . . . . . c b a f c a c . . . . 
+    . . . . c b b b f f a c c . . . 
+    . . . . b b f a b b a a c . . . 
+    . . . . c b f f b a f c a . . . 
+    . . . . . c a a c b b a . . . . 
+    . . . . . . c c c c . . . . . . 
+    . . . . . . . c . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
     `
 ]
 info.setScore(0)
@@ -382,18 +426,16 @@ game.onUpdate(function () {
         mySprite.setKind(SpriteKind.Player)
     }
 })
-game.onUpdateInterval(5000, function () {
-    console.logValue("input", button)
-})
 game.onUpdateInterval(hardness, function () {
-    sprites.destroy(mySprite2)
     if (Math.percentChance(50)) {
         mySprite2 = sprites.create(list._pickRandom(), SpriteKind.Enemy)
         mySprite2.setVelocity(-5, 0)
         mySprite2.setPosition(mySprite.x + 100, mySprite.y + randint(10, 60))
+        mySprite2.lifespan = 5000
     } else {
         if (Math.percentChance(50)) {
             mySprite2 = sprites.create(list._pickRandom(), SpriteKind.Enemy)
+            mySprite2.lifespan = 5000
             if (Math.percentChance(50)) {
                 mySprite2.setVelocity(-15, 0)
             } else {
@@ -403,6 +445,7 @@ game.onUpdateInterval(hardness, function () {
         } else {
             if (Math.percentChance(50)) {
                 mySprite2 = sprites.create(list._pickRandom(), SpriteKind.Enemy)
+                mySprite2.lifespan = 5000
                 mySprite2.setVelocity(-35, 0)
                 mySprite2.setPosition(mySprite.x + 100, mySprite.y + randint(10, 60))
                 if (Math.percentChance(50)) {
@@ -413,6 +456,7 @@ game.onUpdateInterval(hardness, function () {
             } else {
                 if (Math.percentChance(50)) {
                     mySprite2 = sprites.create(list._pickRandom(), SpriteKind.Enemy)
+                    mySprite2.lifespan = 5000
                     mySprite2.setVelocity(-65, 0)
                     mySprite2.setPosition(mySprite.x + 100, mySprite.y + randint(10, 60))
                     if (Math.percentChance(50)) {
@@ -422,6 +466,7 @@ game.onUpdateInterval(hardness, function () {
                     }
                 } else {
                     mySprite2 = sprites.create(list._pickRandom(), SpriteKind.Enemy)
+                    mySprite2.lifespan = 5000
                     mySprite2.setVelocity(-125, 0)
                     mySprite2.setPosition(mySprite.x + 100, mySprite.y + randint(10, 60))
                     if (Math.percentChance(50)) {
