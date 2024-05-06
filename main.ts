@@ -11,6 +11,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(menu)) {
+        music.play(music.createSoundEffect(WaveShape.Noise, 5000, 1, 255, 255, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
         if (moving_left) {
             mySprite4 = sprites.create(img`
                 . . . . . . . . . . . . . . . . 
@@ -114,6 +115,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
     info.changeScoreBy(1)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    music.play(music.createSoundEffect(WaveShape.Noise, 5000, 0, 255, 255, 1000, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
     game.setGameOverScoringType(game.ScoringType.HighScore)
     game.gameOver(false)
 })
