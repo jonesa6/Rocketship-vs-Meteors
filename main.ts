@@ -33,7 +33,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                 . . . . . . . . . . . . . . . . 
                 `, SpriteKind.Projectile)
             mySprite4.setPosition(mySprite.x, mySprite.y)
-            mySprite4.setVelocity(-250, 0)
+            mySprite4.setVelocity(-250 - mySprite.vx, 0)
             mySprite4.lifespan = 5000
         } else {
             mySprite3 = sprites.create(img`
@@ -55,7 +55,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                 . . . . . . . . . . . . . . . . 
                 `, SpriteKind.Projectile)
             mySprite3.setPosition(mySprite.x, mySprite.y)
-            mySprite3.setVelocity(250, 0)
+            mySprite3.setVelocity(250 + mySprite.vx, 0)
             mySprite3.lifespan = 5000
         }
     }
@@ -446,9 +446,6 @@ game.onUpdate(function () {
     if (mySprite.vy > 200) {
         mySprite.vy = 1000
     }
-})
-game.onUpdate(function () {
-	
 })
 game.onUpdateInterval(hardness, function () {
     if (Math.percentChance(50)) {
